@@ -2,11 +2,11 @@ import csv
 from datetime import datetime
 from collections import defaultdict
 
-from sqlalchemy import Column, Integer, String, Text, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import declared_attr, sessionmaker
+# from sqlalchemy import Column, Integer, String, Text, create_engine
+# from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.orm import declared_attr, sessionmaker
 
-from pep_parse.settings import BASE_DIR, STATUS_PEP, NAME, NUMBER_PEP
+from pep_parse.settings import BASE_DIR, STATUS_PEP
 
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
 RESULT_DIR = 'results'

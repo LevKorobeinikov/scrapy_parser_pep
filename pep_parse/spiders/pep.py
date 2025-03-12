@@ -1,18 +1,15 @@
-import scrapy
-
 from urllib.parse import urljoin
 
-from pep_parse.items import PepParseItem
-from pep_parse.settings import (
-    DOMAINS, NUMBER_PEP, NAME_PEP, NAME, STATUS_PEP, URLS
+import scrapy
 
-)
+from pep_parse.items import PepParseItem
+from pep_parse.settings import DOMAINS, NAME_PEP
 
 
 class PepSpider(scrapy.Spider):
     name = NAME_PEP
     allowed_domains = DOMAINS
-    start_urls = URLS
+    start_urls = [f'https://{domain}/' for domain in DOMAINS]
 
     def parse(self, response):
         for link in response.css('tbody > tr > td > a::attr(href)').getall():
@@ -21,12 +18,11 @@ class PepSpider(scrapy.Spider):
             )
 
     def parse_pep(self, response):
+        pep_header = response.css('#pep-content > h1::text')
         data = {
-            NUMBER_PEP: response.css(
-                '#pep-content > h1::text').re_first(r'PEP (\d+)'),
-            NAME: response.css(
-                '#pep-content > h1::text').re_first(r'– (.+)'),
-            STATUS_PEP: response.css(
+            'number': pep_header.re_first(r'PEP (\d+)'),
+            'name': pep_header.re_first(r'– (.+)'),
+            'status': response.css(
                 'dt:contains("Status") + dd > abbr::text').get(),
         }
         yield PepParseItem(data)

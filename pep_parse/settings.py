@@ -5,13 +5,14 @@ DOMAINS = ['peps.python.org']
 RESULTS = 'results'
 
 BOT_NAME = 'pep_parse'
-SPIDERS_MODULE = 'pep_parse.spiders'
-SPIDER_MODULES = [SPIDERS_MODULE]
-NEWSPIDER_MODULE = SPIDERS_MODULE
+NEWSPIDER_MODULE = 'pep_parse.spiders'
+SPIDER_MODULES = [NEWSPIDER_MODULE]
 ROBOTSTXT_OBEY = True
 
 
 BASE_DIR = Path(__file__).parent.parent
+RESULTS_DIR = BASE_DIR / RESULTS
+RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 FEEDS = {
     f'{RESULTS}/pep_%(time)s.csv': {

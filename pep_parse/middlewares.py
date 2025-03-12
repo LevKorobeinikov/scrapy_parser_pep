@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from scrapy import signals
 
 from pep_parse.settings import RESULTS_DIR

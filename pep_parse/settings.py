@@ -8,10 +8,6 @@ BOT_NAME = 'pep_parse'
 NEWSPIDER_MODULE = 'pep_parse.spiders'
 SPIDER_MODULES = [NEWSPIDER_MODULE]
 ROBOTSTXT_OBEY = True
-SPIDER_MIDDLEWARES = {
-    'pep_parse.middlewares.CreateResultsDirOnOpenMiddleware': 500,
-}
-
 
 BASE_DIR = Path(__file__).parent.parent
 RESULTS_DIR = BASE_DIR / RESULTS

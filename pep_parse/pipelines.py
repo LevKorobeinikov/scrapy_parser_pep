@@ -11,8 +11,10 @@ TOTAL = 'ИТОГО'
 
 
 class PepParsePipeline:
-    def open_spider(self, spider):
+    def __init__(self):
         RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+
+    def open_spider(self, spider):
         spider.logger.info(f'Results directory created at {RESULTS_DIR}')
         self.results = defaultdict(int)
 
